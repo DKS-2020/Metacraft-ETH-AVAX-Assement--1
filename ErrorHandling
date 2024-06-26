@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ErrorHandling {
+    function Division(uint numerator, uint denominator) public pure returns (uint) {
+        require(denominator != 0, "Denominator cannot be zero");
+        if (numerator % denominator != 0) {
+            revert("Numerator must be divisible by denominator");
+        }
+        return numerator / denominator;
+    }
+
+    function add(uint a, uint b) public pure returns (uint) {
+        require(a > 0 && b > 0, "Both numbers must be greater than 0");
+        uint result = a + b;
+        assert(result >= a);
+        return result;
+    }
+
+    function subtract(uint a, uint b) public pure returns (uint) {
+        require(a > 0 && b > 0, "Both numbers must be greater than 0");
+        require(a >= b, "Subtraction result cannot be negative");
+        return a - b;
+    }
+
+    function multiply(uint a, uint b) public pure returns (uint) {
+        require(a > 0 && b > 0, "Both numbers must be greater than 0");
+        uint result = a * b;
+        assert(a == 0 || result / a == b);
+        return result;
+    }
+}
